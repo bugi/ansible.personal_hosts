@@ -59,3 +59,9 @@
     - { role: install/packages , packages: "{{ packages.tools }}" }
     - { role: install/packages , packages: "{{ packages.fallback }}" }
     - { role: install/packages , packages: "{{ packages.entertainment }}" }
+
+
+- hosts: desktop
+  sudo: True
+  roles:
+    - desktop/tune

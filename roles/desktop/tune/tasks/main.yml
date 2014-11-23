@@ -1,0 +1,10 @@
+---
+
+- name: set swappiness to zero at boot
+  lineinfile:
+    dest=/etc/sysctl.conf
+    regexp="^vm.swappiness="
+    line="vm.swappiness=0"
+
+- name: set swappiness to zero now
+  shell: echo 0 > /proc/sys/vm/swappiness
