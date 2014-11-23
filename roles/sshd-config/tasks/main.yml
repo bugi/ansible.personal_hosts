@@ -1,0 +1,13 @@
+---
+
+- name: set in sshd_config PasswordAuthentication no
+  lineinfile:
+    dest=/etc/ssh/sshd_config
+    regexp="^PasswordAuthentication "
+    line="PasswordAuthentication no"
+
+- name: set in sshd_config ClientAliveInterval 3600
+  lineinfile:
+    dest=/etc/ssh/sshd_config
+    regexp="^ClientAliveInterval "
+    line="ClientAliveInterval 3600"

@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  sudo: True
+  roles:
+    - install/files-basic
+
+- hosts: all
+  sudo: True
+  roles:
+    - sshd-config
