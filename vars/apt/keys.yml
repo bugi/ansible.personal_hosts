@@ -1,0 +1,40 @@
+---
+
+apt_key:
+  google:
+    url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+  getdeb:
+    url: http://archive.getdeb.net/getdeb-archive.key
+
+apt_repo_requiring_key:
+  google_chrome_stable:
+    key: "{{ apt_key.google }}"
+    repo: deb http://dl.google.com/linux/chrome/deb/ stable main
+  google_music_manager:
+    key: "{{ apt_key.google }}"
+    repo: deb http://dl.google.com/linux/musicmanager/deb/ stable main
+  google_talk_plugin:
+    key: "{{ apt_key.google }}"
+    repo: deb http://dl.google.com/linux/talkplugin/deb/ stable main
+  getdeb:
+    key: "{{ apt_key.getdeb }}"
+    repo: deb http://archive.getdeb.net/ubuntu utopic-getdeb apps
+
+# The key is arbitrary, but often named for the repo.
+# The reason for the odd structure is to allow lists of packages.
+apt_packages_with_repo_requiring_key:
+  google_chrome_stable:
+    repo: "{{ apt_repo_requiring_key.google_chrome_stable }}"
+    packages:
+      - google-chrome-stable
+  google_musicmanager_beta:
+    repo: "{{ apt_repo_requiring_key.google_music_manager }}"
+    packages:
+      - google-musicmanager-beta
+  google_talkplugin:
+    repo: "{{ apt_repo_requiring_key.google_talk_plugin }}"
+    packages:
+      - google-talkplugin
+  getdeb:
+    repo: "{{ apt_repo_requiring_key.getdeb }}"
+    packages: []

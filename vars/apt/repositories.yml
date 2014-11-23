@@ -1,0 +1,30 @@
+---
+
+ppa:
+
+# latest terminator is in raring.  maybe even in quantal.
+# - ppa:gnome-terminator/ppa
+#		vi /etc/apt/sources.list.d/gnome-terminator-ppa-quantal.list
+#		change release to oneiric
+
+# - ppa:juju/pkgs
+# - ppa:keithw/mosh
+# - ppa:malcscott/ppa
+  - ppa:mozillateam/firefox-next
+# - ppa:mozillateam/thunderbird-next
+  - ppa:team-xbmc/ppa
+# - ppa:nathan-renniewaldock/xbmc-stable
+  - ppa:ansible/ansible
+# - ppa:saltstack/salt
+# - ppa:ubuntu-lxc/stable
+# - ppa:ubuntu-lxc/daily
+  - ppa:ubuntu-x-swat/x-updates
+# - ppa:zfs-native/stable # http://zfsonlinux.org/faq.html#HowDoIInstallIt
+# - ppa:bumblebee/stable # bumblebee-project.org
+# ... # for a recent pidgin-sipe, for digimarc
+# - ppa:libreoffice/libreoffice-3-6 # 3.6.2 can't read some documents produced by dmrc's Jack
+# - ppa:libreoffice/ppa # latest libreoffice
+# - ppa:tsbarnes/indicator-keylock
+
+# ppa:tualatrix provides ubuntu-tweak
+  - ppa:tualatrix

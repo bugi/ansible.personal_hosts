@@ -1,0 +1,30 @@
+---
+
+# usage:
+
+# in a vars file, say vars/packages_by_url.yml
+#     packages_by_url:
+#       - getdeb-repository:
+#           name: getdeb-repository
+#           url: http://archive.getdeb.net/install_deb/getdeb-repository_0.1-1~getdeb1_all.deb
+#
+# in a playbook:
+#     - host: xxx
+#       vars_files:
+#         - vars/packages_by_url.yml
+#       roles:
+#         - { role: install-deb-from-url , item: {{ packages_by_url.getdeb-repository }} }
+
+
+
+- name: verify that we actually need to install this package
+  shell: if dpkg -l "{{item.name}}" ; then echo installed ; else echo missing ; fi
+  register: result
+
+- name: download {{item.name}}
+  get_url: url="{{item.url}}" dest="/var/cache/apt/archives/{{item.name}}"
+  when: result.stdout == "missing"
+
+- name: install {{item.name}}
+  apt: deb="{{item.url}}" dest="/var/cache/apt/archives/{{item.name}}"
+  when: result.stdout == "missing"

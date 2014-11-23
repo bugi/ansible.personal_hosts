@@ -1,0 +1,63 @@
+---
+
+# use like:
+# { role: install/packages , packages: "{{ packages.ubuntu }}" }
+
+packages:
+
+  machine:
+    all:
+      - powertop
+      - sshfs
+    ubuntu:
+      - ubuntu-tweak
+    desktop:
+      - terminator
+      - fonts-inconsolata
+      - firefox
+      - kmix
+      - gnome-control-center
+    portable:
+      all:
+        - laptop-mode-tools
+      thinkpad:
+        - thinkfan
+
+  dev:
+    - vim-gtk
+    - git
+    - subversion
+
+  tools:
+    - software-properties-common
+    - ansible
+    - gawk
+    - par
+
+
+  fallback:
+    - xterm
+
+  entertainment:
+    - mpd
+    - mpc
+    - vlc
+
+
+
+
+  deprecated:
+    desktop:
+      # usually prefer claws or gmail
+      - thunderbird
+    machine:
+      # alternative to ssh
+      - mosh
+    laptop:
+      # onscreen capslock indicator for machines w/o capslock indicator
+      #	(but we kill the capslock, so meh)
+      - indicator-keylock
+    dmrc:
+      - pidgin
+      - pidgin-sipe
+
