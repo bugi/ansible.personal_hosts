@@ -1,0 +1,26 @@
+---
+
+# Each user is an assoc array consisting of
+#       name
+#       ssh_keys (a list)
+#       revoked_ssh_key_files (a list)
+#       and a lot of optional stuff
+# see also:
+#       http://docs.ansible.com/user_module.html
+#       http://docs.ansible.com/authorized_key_module.html
+
+user_rootBG:
+  name: rootBG
+  uid: 0
+  system: yes
+  group: root
+  groups: []
+  home: /root
+  create_home: no
+  password: "{{ user_passwords.rootBG }}"
+  non_unique: yes
+  shell: /bin/bash
+  update_password: on_create
+  ssh_keys:
+    - file: "{{ asset_path_public_keys }}/brian_0.pub"
+      state: present

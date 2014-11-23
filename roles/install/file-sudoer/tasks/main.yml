@@ -1,0 +1,12 @@
+---
+
+- name: sudoer file
+  copy:
+  args:
+    src: "{{ asset_path_general_files }}/{{ item }}"
+    dest: /{{ item }}
+    mode: 0440
+    owner: root
+    group: root
+  with_items:
+    - etc/sudoers.d/{{ filename }}

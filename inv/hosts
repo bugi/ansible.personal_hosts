@@ -1,0 +1,18 @@
+# localhost is now implicit --  localhost  ansible_connection=local
+
+[desktop-portable]
+turtle
+libre
+
+[desktop-stationary]
+stomp
+
+[desktop:children]
+desktop-portable
+desktop-stationary
+
+[server-home]
+chicken
+
+[server:children]
+server-home

@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  sudo: True
+  roles:
+    - { role: bugi.users_and_groups , users_and_groups: "{{ users_and_groups }}" }
+
+
+- hosts: all
+  sudo: True
+  roles:
+    - { role: install/file-sudoer , filename: 10_brian }

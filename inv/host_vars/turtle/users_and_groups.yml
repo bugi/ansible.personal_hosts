@@ -1,0 +1,33 @@
+---
+
+# this should be per in host_vars
+
+# GROUPS is a list of items consisting of name, system, gid
+#       http://docs.ansible.com/group_module.html
+# USERS is a list of items consisting of
+#       name
+#       ssh_keys (a list)
+#       revoked_ssh_key_files (a list)
+#       and a lot of optional stuff
+#       see also:
+#               http://docs.ansible.com/user_module.html
+#               http://docs.ansible.com/authorized_key_module.html
+# GROUPS_REMOVED is a list of items consisting of name
+# USERS_REMOVED is a list of items consisting of name
+
+
+# This assumes that you do something like this before using users_and_groups:
+# vars_files:
+#   - vars/users/brian.yml
+#   - vars/users/rootBG.yml
+
+users_and_groups:
+  users:
+    - "{{ user_brian }}"
+    - "{{ user_rootBG }}"
+  users_removed:
+    - name: briang
+      remove: yes
+  groups: []
+  groups_removed: []
+

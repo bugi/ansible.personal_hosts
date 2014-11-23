@@ -1,0 +1,11 @@
+---
+
+- name: files of root and generally readable
+  copy:
+  args:
+    src: "{{ asset_path_general_files }}/{{ item }}"
+    dest: /{{ item }}
+    mode: 0644
+  with_items:
+    - etc/hosts
+    - etc/apt/apt.conf.d/02proxy

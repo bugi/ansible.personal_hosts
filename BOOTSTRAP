@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# This is for the first run of ansible against a host.
+# It sets up a few minimal things:
+#	A user with an ssh key and sudo rights.
+#	A few files, like /etc/hosts.
+
+# FN contains a list of playbooks to run for the bootstrap.
+FN=( pb-ping.yml )  # use this one for testing
+FN=( pb-user-"$(id -un)".yml pb-bootstrap.yml )
+
+HN="$1" ; shift
+if [ -z "${HN#--limit=}" ]
+then
+	echo "The first arg MUST be a --limit statement specifiying the host(s) you want to bootstrap." 1>&2
+	exit 1
+fi
+
+if ! cd "$(dirname "$0")"
+then
+	echo first cd failed 1>&2
+	exit 1
+fi
+
+mkdir -p "$(basename "$0")".d
+if ! cd "$(basename "$0")".d
+then
+	echo cd failed 1>&2
+	exit 1
+fi
+
+for f in assets inv roles vars "${FN[@]}"
+do
+	if [ -r ../"$f" ]
+	then
+		ln -sf ../"$f" .
+	else
+		echo "file /$f dne" 1>&2
+		exit 1
+	fi
+done
+
+
+echo --- > site.yml
+for f in "${FN[@]}"
+do
+	echo "- include: $f" >> site.yml
+done
+
+cat ../ansible.cfg |sed 's/-o PasswordAuthentication=no//' > ansible.cfg
+
+ansible-playbook -i inv --ask-vault-pass -kK site.yml "$@"

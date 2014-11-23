@@ -1,0 +1,7 @@
+---
+
+asset_path: "{{ playbook_dir }}/assets"
+asset_path_private: "{{ playbook_dir }}/assets/private"
+asset_path_public_keys: "{{ asset_path_private }}/users/public_keys"
+asset_path_general_files: "{{ asset_path_private }}/files"
+asset_path_general_templates: "{{ asset_path_private }}/templates"

@@ -1,0 +1,14 @@
+---
+
+# This is mainly for the initial boostrap of a host,
+# but it's also handy for a quick run of apt-get-dist-upgrade.
+
+- hosts: all
+  sudo: True
+  roles:
+    - install/files-basic
+
+- hosts: all
+  sudo: True
+  roles:
+    - apt-get-dist-upgrade
