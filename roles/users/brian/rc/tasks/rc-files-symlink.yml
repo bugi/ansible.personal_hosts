@@ -1,0 +1,102 @@
+---
+
+# /home/brian/.ssh -> .rc/ssh
+
+
+# initially from ~/.rc-private/SETUP
+
+- name: make sure directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - .config
+
+# there's a special prohibition against the file module making a directory called "usr"
+- name: make usr directory exists
+  command: mkdir -p usr
+
+- name: test whether troublesome files are symlinks
+  shell: test -h {{item}} || echo no
+  register: ftest
+  with_items:
+    - .profile
+    - .bash_logout
+    - .bashrc
+
+- name: remove troublesome files that are not symlinks
+  file:
+    path: "{{ item['item'] }}"
+    state: absent
+  when: item.stdout.find('no') != -1
+  with_items: ftest.results
+
+- name: link from rc-private
+  file:
+    src: .rc-private/{{ item }}
+    dest: .{{ item }}
+    state: link
+  with_items:
+    - gitconfig
+    - i3
+    - i3status.conf
+    - mpd
+    - toprc
+    - gitconfig
+    - gtkrc-2.0
+    - profile
+    - vim
+    - vimrc
+    - Xmodmaprc.{{ ansible_hostname }}
+
+- name: link host-specific files without their hostname
+  file:
+    src: .rc-private/{{ item }}.{{ ansible_hostname }}
+    dest: .{{ item }}
+    state: link
+  with_items:
+    - xsession
+
+- name: link from ../rc-private
+  file:
+    src: ../.rc-private/{{ item }}
+    dest: .{{ item }}
+    state: link
+  with_items:
+    - config/fontconfig
+
+- name: link from rc-public
+  file:
+    src: .rc-public/{{ item }}
+    dest: .{{ item }}
+    state: link
+  with_items:
+    - bash_logout
+
+#
+# special symlinks
+#
+
+- name: ln -s .xsession .xinitrc
+  file:
+    src: .xsession
+    dest: .initrc
+    state: link
+
+- name: ln -s .bashrc
+  file:
+    src: .rc-public/bashrc.d/bashrc
+    dest: .bashrc
+    state: link
+
+- name: ln -s bin
+  file:
+    src: ../.rc-private/bin
+    dest: usr/bin
+    state: link
+
+- name: ln -s .config/terminator
+  file:
+    src: ../.rc-private/terminator
+    dest: .config/terminator
+    state: link

@@ -1,0 +1,19 @@
+---
+
+- name: edit /etc/default/mpd
+  sudo: yes
+  lineinfile:
+    dest: /etc/default/mpd
+    regexp: "^START_MPD="
+    line: "START_MPD=false"
+
+
+# this moved into ~/.xsession, right after starting pulseaudio
+# (started using pulseaudio because skype insisted :( )
+- name: cron to start mpd after boot
+  sudo: no
+  cron:
+    name: start mpd after boot for {{ ansible_user_id }}
+    special_time: reboot
+    state: absent
+    job: sleep 65 ; /home/brian/.mpd/RUNME

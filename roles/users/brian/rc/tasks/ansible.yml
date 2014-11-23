@@ -1,0 +1,25 @@
+---
+
+- name: test whether .ansible is a symlink
+  shell: test -h .ansible || echo no
+  register: ftest
+
+- name: remove .ansible if it is not a symlink
+  file:
+    path: .ansible
+    state: absent
+  when: ftest.stdout.find('no') != -1
+
+
+
+- name: ln -s .ansible
+  file:
+    src: .rc-private/ansible
+    dest: .ansible
+    state: link
+
+- name: ln -s .ansible.cfg
+  file:
+    src: .ansible/ansible.cfg
+    dest: .ansible.cfg
+    state: link

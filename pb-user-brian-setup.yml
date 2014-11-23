@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  sudo: False
+  roles:
+    - users/brian/rc
+    - users/brian/mpd
+    - users/brian/packages
+

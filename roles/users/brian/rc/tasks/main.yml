@@ -1,0 +1,6 @@
+---
+
+- include: repos.yml
+- include: ssh.yml
+- include: rc-files-symlink.yml
+- include: ansible.yml

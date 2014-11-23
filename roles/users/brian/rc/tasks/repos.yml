@@ -1,0 +1,21 @@
+---
+
+
+- name: .rc-private
+  git:
+    repo: git@github.com:bugi/rc.git
+    dest: .rc-private
+    accept_hostkey: yes
+- name: ln -s .rc
+  file:
+    src: .rc-private
+    dest: .rc
+    state: link
+
+
+
+- name: .rc-public
+  git:
+    repo: git@github.com:bugi/rc-public.git
+    dest: .rc-public
+    accept_hostkey: yes

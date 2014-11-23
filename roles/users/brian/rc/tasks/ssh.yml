@@ -1,0 +1,32 @@
+---
+
+- name: priv .ssh
+  file:
+    path: .rc-private/ssh
+    mode: 0700
+
+- name: priv .ssh files
+  file:
+    path: .rc-private/ssh/{{ item }}
+    mode: 0600
+  with_items:
+    - id_dsa
+    - known_hosts
+
+- name: test whether .ssh is a symlink
+  shell: test -h .ssh || echo no
+  register: ftest
+
+
+- name: remove .ssh if it is not a symlink
+  file:
+    path: .ssh
+    state: absent
+  when: ftest.stdout.find('no') != -1
+
+
+- name: ln -s ssh
+  file:
+    src: .rc-private/ssh
+    dest: .ssh
+    state: link

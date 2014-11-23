@@ -1,0 +1,12 @@
+---
+
+# packages useful to brian that aren't likely to be installed otherwise
+
+- name: packages
+  sudo: yes
+  apt: name={{ item }} state=present
+  with_items:
+#   - mosh
+    - perl-doc
+    - libdate-calc-perl
+    - liburi-perl
