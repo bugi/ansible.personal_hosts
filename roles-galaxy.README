@@ -1,0 +1,4 @@
+To populate roles-galaxy/ do this:
+
+mkdir -p roles-galaxy
+ansible-galaxy --roles-path=roles-galaxy --role-file=roles-galaxy.list install
