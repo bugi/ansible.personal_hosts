@@ -22,6 +22,12 @@ then
 	exit 1
 fi
 
+if [ ! -e roles-galaxy/bugi.users_and_groups ]
+then
+	ansible-galaxy --roles-path=roles-galaxy --role-file=roles-galaxy.list install --force
+fi
+
+
 mkdir -p "$(basename "$0")".d
 if ! cd "$(basename "$0")".d
 then
