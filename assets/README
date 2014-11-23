@@ -1,0 +1,2 @@
+Make a symlink in this directory named private.  Private is the non-public
+place to store files that need to be installed, but not shared with the world.
