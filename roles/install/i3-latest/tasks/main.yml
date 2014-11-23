@@ -1,0 +1,42 @@
+---
+
+# http://i3wm.org/docs/repositories.html
+
+- name: update custom desktop configuration from template
+  copy:
+    src: "{{ item }}"
+    dest: /{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - usr/share/xsessions/custom.desktop
+    - etc/apt/preferences.d/00-i3-autobuild.pref
+
+- name: add i3 ubuntu repo
+  apt_repository:
+    repo: deb http://build.i3wm.org/ubuntu/trusty trusty main
+    update_cache: yes
+    state: present
+
+- name: ensure i3 key is present
+  apt:
+    pkg: i3-autobuild-keyring
+    state: latest
+    force: yes
+
+- name: ensure i3wm is installed, plus a few other semi-related things
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - blueman
+    - dunst
+    - dzen2
+    - i3
+    - i3status
+    - suckless-tools
+    - unclutter
+    - xbacklight
+    - xclip

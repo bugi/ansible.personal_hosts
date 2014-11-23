@@ -1,0 +1,12 @@
+---
+
+# This role depends on the apt-repo-requiring-key role.
+
+# { role: install/apt-packages-with-repo-requiring-key
+    # , H: {{ apt_packages_with_repo_requiring_key.google-chrome-stable }}
+    # }
+
+- name: install packages (depending on repo and key)
+  apt:
+    pkg: "{{ item }}"
+  with_items: H.packages

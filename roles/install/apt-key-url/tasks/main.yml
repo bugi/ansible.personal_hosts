@@ -1,0 +1,9 @@
+---
+
+# This is a role mainly so it can be a dependency.
+# It is used as a dependency by apt-repo-requiring-key, for one.
+
+- name: set key from {{ K.url }}
+  apt_key:
+    url: "{{ K.url }}"
+    state: present

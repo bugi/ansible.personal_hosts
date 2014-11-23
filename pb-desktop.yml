@@ -1,0 +1,61 @@
+---
+
+- hosts: desktop
+  sudo: True
+  vars_files:
+    - vars/apt/repositories.yml
+  roles:
+    - { role: install/repositories , repos: "{{ ppa }}" }
+
+
+- hosts: desktop
+  sudo: True
+  vars_files:
+    - vars/apt/keys.yml
+  roles:
+    - { role: install/apt-repo-requiring-key
+        , R: "{{ apt_packages_with_repo_requiring_key.google_chrome_stable.repo }}" }
+    - { role: install/apt-repo-requiring-key
+        , R: "{{ apt_packages_with_repo_requiring_key.google_talkplugin.repo }}" }
+
+
+
+
+- hosts: desktop
+  sudo: True
+  roles:
+    - install/i3-latest
+    - install/skype
+
+
+
+
+
+- hosts: desktop
+  sudo: True
+  vars_files:
+    - vars/apt/keys.yml
+  roles:
+    - apt-get-update
+    - { role: install/apt-packages-with-repo-requiring-key
+          , H: "{{ apt_packages_with_repo_requiring_key.google_chrome_stable }}"
+          }
+    - { role: install/apt-packages-with-repo-requiring-key
+          , H: "{{ apt_packages_with_repo_requiring_key.google_talkplugin }}"
+          }
+
+
+- hosts: desktop
+  sudo: True
+  vars_files:
+    - vars/apt/packages.yml
+  roles:
+    - { role: install/packages , packages: "{{ packages.machine.all }}" }
+    - { role: install/packages , packages: "{{ packages.machine.ubuntu }}" }
+    - { role: install/packages , packages: "{{ packages.machine.desktop }}" }
+    - { role: install/packages , packages: "{{ packages.machine.portable.all }}" }
+    - { role: install/packages , packages: "{{ packages.machine.portable.thinkpad }}" }
+    - { role: install/packages , packages: "{{ packages.dev }}" }
+    - { role: install/packages , packages: "{{ packages.tools }}" }
+    - { role: install/packages , packages: "{{ packages.fallback }}" }
+    - { role: install/packages , packages: "{{ packages.entertainment }}" }

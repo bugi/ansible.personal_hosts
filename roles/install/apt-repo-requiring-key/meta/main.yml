@@ -1,0 +1,5 @@
+---
+
+allow_duplicates: yes
+dependencies:
+  - { role: install/apt-key-url , K: "{{ R.key }}" }

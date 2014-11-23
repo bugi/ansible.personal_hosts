@@ -1,0 +1,9 @@
+---
+
+# This is a role mainly so it can be a dependency.
+# This role depends on the apt-key-url role.
+
+- name: enable repo {{ R.repo }}
+  apt_repository:
+    repo: "{{ R.repo }}"
+    state: present

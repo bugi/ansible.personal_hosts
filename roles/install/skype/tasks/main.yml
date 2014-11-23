@@ -1,0 +1,20 @@
+---
+
+# https://help.ubuntu.com/community/Skype
+# https://wiki.ubuntu.com/SkypeEthics
+
+- name: include i386 architecture
+  command: dpkg --add-architecture i386
+
+- name: add ubuntu repo containing skype
+  apt_repository:
+    repo: deb http://archive.canonical.com/ {{ ansible_distribution_release }} partner
+    update_cache: yes
+    state: present
+
+- name: install skype package
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - skype
