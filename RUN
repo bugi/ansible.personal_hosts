@@ -1,3 +1,28 @@
 #!/bin/bash
 
-ansible-playbook -i inv --ask-vault-pass "$@"
+# create a tmp file for the password
+# and protect it as well as possible
+tmp="$HOME"/tmp
+mkdir -p "$tmp"
+chmod 1755 "$tmp"
+tmp="$tmp/ansible_cache"
+mkdir -p "$tmp"
+chmod 700 "$tmp"
+danger="$( mktemp --tmpdir="$tmp" )"
+chmod 600 "$danger"
+
+# delete the pw file upon exit
+function on_exit () {
+	rm -f "$danger"
+	}
+trap on_exit EXIT
+
+# fill the pw file by haranguing the user
+echo
+echo
+echo 'This is for access to the ansible vault.  Oplop says:'
+echo
+oplop --stdout > "$danger"
+
+# pass the pw file to ansible
+ansible-playbook -i inv --vault-password-file="$danger" "$@"
