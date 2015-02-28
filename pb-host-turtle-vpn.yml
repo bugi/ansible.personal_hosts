@@ -1,0 +1,8 @@
+---
+
+- hosts: turtle
+  sudo: True
+  vars_files:
+    - vars/secrets/brian.yml
+  roles:
+    - { role: openvpn/client , keyname: sh-brian-turtle-v001 }
