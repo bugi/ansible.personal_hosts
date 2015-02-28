@@ -1,0 +1,21 @@
+---
+
+- name: install openvpn
+  apt: package=openvpn state=present
+
+- name: copy key file
+  copy:
+    src: "{{ asset_path_private }}/openvpn/{{keyname}}.ovpn.bf"
+    dest: "/etc/openvpn/{{keyname}}.ovpn.bf"
+    owner: root
+    group: root
+    mode: 0400
+
+- name: decrypt key file
+  decryptfile:
+    src: "/etc/openvpn/{{keyname}}.ovpn.bf"
+    dest: "/etc/openvpn/{{keyname}}.ovpn"
+    owner: root
+    group: root
+    mode: 0400
+    password: "{{ encryptedfile.openvpn[keyname] }}"
