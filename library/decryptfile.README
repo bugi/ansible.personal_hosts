@@ -1,0 +1,30 @@
+Use it something like this:
+
+	- name: install openssl for decryptfile
+	  apt: package=openssl state=present
+
+	- name: copy encrypted file to destination
+	  copy:
+	    src: "{{ asset_path_private }}/foo.bf"
+	    dest: /etc/foo.bf
+	    owner: root
+	    group: root
+	    mode: 0400
+
+	- name: decrypt file
+	  decryptfile:
+	    src: /etc/foo.bf
+	    dest: /etc/foo
+	    owner: root
+	    group: root
+	    mode: 0400
+	    password: "{{ my_secret_password }}"
+
+
+
+# decrypt to stdout
+# This will ask for the encryption password on stdin.
+openssl enc -bf -d -pass stdin -in file-to-decrypt
+
+# encrypt file "file-to-encrypt" and write it to file "destination-file":
+openssl enc -bf -e -in file-to-encrypt -out destination-file -pass stdin

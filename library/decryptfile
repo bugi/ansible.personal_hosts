@@ -1,0 +1,88 @@
+#!/usr/bin/python
+
+DOCUMENTATION = '''
+---
+module: decryptfile
+short_description: Install files that are sourced from encrypted version.
+description:
+    - Install files that are sourced from encrypted version.
+author: Sean Reifschneider
+requirements:
+    - C(openssl) package
+options:
+  path:
+    description:
+      - Destination of unencrypted data.
+    required: true
+    default: []
+  password:
+    description:
+      - Password used for decryption.
+    required: true
+    default: null
+'''
+
+EXAMPLES = '''
+- decryptfile: src=config_file.bf dest=/etc/config_file password=foo
+'''
+
+import os
+
+
+def is_newer_than(src, dest):
+    return (
+        not os.path.exists(dest)
+        or os.path.getmtime(src) > os.path.getmtime(dest))
+
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            src      = dict(required=True),
+            dest     = dict(aliases=['path', 'name'], required=True),
+            password = dict(required=True, no_log=True),
+        ),
+        add_file_common_args=True,
+        supports_check_mode=True,
+    )
+
+    src = os.path.expanduser(module.params['src'])
+    if not os.path.exists(src):
+        module.fail_json(msg="Source %s does not exist" % (src))
+
+
+    if src == src.rstrip('.bf'):
+        module.fail_json(
+            msg='Expected src "%s" to have .bf extension' % src)
+
+    dest = os.path.expanduser(module.params['dest'])
+    if dest != dest.rstrip('.bf'):
+        module.fail_json(
+            msg='Did not expect dest "%s" to have .bf extension' % dest)
+
+#   module.fail_json(msg="because I said so (%s)" % src)
+
+    changed = False
+
+    if is_newer_than(src, dest):
+        (keyfile_fd, keyfile_name) = tempfile.mkstemp()
+        os.write(keyfile_fd, module.params['password'])
+        os.close(keyfile_fd)
+
+        cmd = [
+            'openssl', 'enc', '-bf', '-d', '-in', src, '-out', dest,
+            '-kfile', keyfile_name]
+        rc, out, error = module.run_command(cmd, check_rc=True)
+        if error:
+            module.fail_json(
+                msg='OpenSSL command failed with output: "%s"' % error)
+        os.remove(keyfile_name)
+        changed = True
+
+    file_args = module.load_file_common_arguments(module.params)
+    file_args['path'] = dest
+    changed = module.set_file_attributes_if_different(file_args, changed)
+    module.exit_json(dest=dest, changed=changed)
+
+from ansible.module_utils.basic import *  # noqa
+main()
