@@ -17,6 +17,7 @@ packages:
       - firefox
       - kmix
       - gnome-control-center
+      - kdesudo
     portable:
       all:
         - laptop-mode-tools
