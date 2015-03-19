@@ -1,0 +1,6 @@
+---
+
+- hosts: desktop-portable
+  sudo: True
+  roles:
+    - role: laptop/lid
