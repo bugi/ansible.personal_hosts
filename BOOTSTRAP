@@ -42,7 +42,7 @@ cat <<-EOF > README
 	Go ahead and delete this directory.
 	EOF
 
-for f in assets inv roles vars "${FN[@]}"
+for f in assets inv roles vars roles-galaxy "${FN[@]}"
 do
 	if [ -r ../"$f" ]
 	then
