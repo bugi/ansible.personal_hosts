@@ -3,6 +3,7 @@
 [desktop-portable]
 turtle
 libre
+bug
 
 [desktop-stationary]
 stomp
