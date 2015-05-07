@@ -18,7 +18,12 @@ ppa:
 # - ppa:saltstack/salt
 # - ppa:ubuntu-lxc/stable
 # - ppa:ubuntu-lxc/daily
-  - ppa:ubuntu-x-swat/x-updates
+#
+# x-swat kinda just fell off the planet
+# xorg-edgers (http://www.ubuntuupdates.org/ppa/xorg-edgers) is similar but note the requirement for ppa-purge
+# - ppa:ubuntu-x-swat/x-updates
+# - ppa:xorg-edgers/ppa
+#
 # - ppa:zfs-native/stable # http://zfsonlinux.org/faq.html#HowDoIInstallIt
 # - ppa:bumblebee/stable # bumblebee-project.org
 # ... # for a recent pidgin-sipe, for digimarc
