@@ -21,6 +21,7 @@ then
 	echo first cd failed 1>&2
 	exit 1
 fi
+ORIG_DIR="$(pwd)"
 
 if [ ! -e roles-galaxy/bugi.users_and_groups ]
 then
@@ -63,3 +64,5 @@ done
 cat ../ansible.cfg |sed 's/-o PasswordAuthentication=no//' > ansible.cfg
 
 ansible-playbook -i inv --ask-vault-pass -kK "$HN" site.yml "$@"
+
+cd "$ORIG_DIR" && rm -rf BOOTSTRAP.d
