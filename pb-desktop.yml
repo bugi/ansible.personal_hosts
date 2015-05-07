@@ -50,15 +50,15 @@
   vars_files:
     - vars/apt/packages.yml
   roles:
-    - { role: install/packages , packages: "{{ packages.machine.all }}" }
-    - { role: install/packages , packages: "{{ packages.machine.ubuntu }}" }
-    - { role: install/packages , packages: "{{ packages.machine.desktop }}" }
-    - { role: install/packages , packages: "{{ packages.machine.portable.all }}" }
-    - { role: install/packages , packages: "{{ packages.machine.portable.thinkpad }}" }
-    - { role: install/packages , packages: "{{ packages.dev }}" }
-    - { role: install/packages , packages: "{{ packages.tools }}" }
-    - { role: install/packages , packages: "{{ packages.fallback }}" }
-    - { role: install/packages , packages: "{{ packages.entertainment }}" }
+    - { role: install/packages , x: "{{ packages.machine.all }}" }
+    - { role: install/packages , x: "{{ packages.machine.ubuntu }}" }
+    - { role: install/packages , x: "{{ packages.machine.desktop }}" }
+    - { role: install/packages , x: "{{ packages.machine.portable.all }}" }
+    - { role: install/packages , x: "{{ packages.machine.portable.thinkpad }}" }
+    - { role: install/packages , x: "{{ packages.dev }}" }
+    - { role: install/packages , x: "{{ packages.tools }}" }
+    - { role: install/packages , x: "{{ packages.fallback }}" }
+    - { role: install/packages , x: "{{ packages.entertainment }}" }
 
 
 - hosts: desktop

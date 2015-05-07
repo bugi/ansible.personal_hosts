@@ -1,7 +1,7 @@
 ---
 
 # use like:
-# { role: install/packages , packages: "{{ packages.ubuntu }}" }
+# { role: install/packages , x: "{{ packages.machine.ubuntu }}" }
 
 packages:
 
