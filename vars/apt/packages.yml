@@ -9,6 +9,7 @@ packages:
     all:
       - powertop
       - sshfs
+      - curl
     ubuntu: []
 #     - ubuntu-tweak
     desktop:
