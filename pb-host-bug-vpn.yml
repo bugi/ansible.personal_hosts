@@ -1,0 +1,8 @@
+---
+
+- hosts: bug
+  sudo: True
+  vars_files:
+    - vars/secrets/brian.yml
+  roles:
+    - { role: openvpn/client , keyname: sh-brian-bug-v001 }
