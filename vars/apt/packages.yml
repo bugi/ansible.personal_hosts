@@ -9,8 +9,8 @@ packages:
     all:
       - powertop
       - sshfs
-    ubuntu:
-      - ubuntu-tweak
+    ubuntu: []
+#     - ubuntu-tweak
     desktop:
       - terminator
       - fonts-inconsolata
