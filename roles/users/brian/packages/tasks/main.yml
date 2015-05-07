@@ -10,3 +10,8 @@
     - perl-doc
     - libdate-calc-perl
     - liburi-perl
+
+# for steam:
+# wget http://media.steampowered.com/client/installer/steam.deb
+# sudo dpkg -i steam.deb
+# rm -f steam.deb
