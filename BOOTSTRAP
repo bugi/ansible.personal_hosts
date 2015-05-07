@@ -62,4 +62,4 @@ done
 
 cat ../ansible.cfg |sed 's/-o PasswordAuthentication=no//' > ansible.cfg
 
-ansible-playbook -i inv --ask-vault-pass -kK site.yml "$@"
+ansible-playbook -i inv --ask-vault-pass -kK "$HN" site.yml "$@"
