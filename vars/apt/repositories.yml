@@ -36,4 +36,5 @@ ppa:
 
   # https://bbs.archlinux.org/viewtopic.php?id=192875&p=2     # (search for tpacpi-bat)
   # http://www.thinkwiki.org/wiki/Tpacpi-bat
-  - ppa:morgwai/tpbat
+# - ppa:morgwai/tpbat
+  - deb http://ppa.launchpad.net/morgwai/tpbat/ubuntu trusty main
