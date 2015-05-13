@@ -10,8 +10,9 @@ packages:
       - powertop
       - sshfs
       - curl
-    ubuntu: []
-#     - ubuntu-tweak
+    ubuntu:
+      # - ubuntu-tweak
+      - ppa-purge
     desktop:
       - terminator
       - fonts-inconsolata
@@ -24,6 +25,9 @@ packages:
         - laptop-mode-tools
       thinkpad:
         - thinkfan
+        - indicator-keylock
+        - tpacpi-bat
+        - tpbat-utils-acpi
 
   dev:
     - vim-gtk
