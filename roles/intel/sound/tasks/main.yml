@@ -1,0 +1,8 @@
+---
+
+- name: disable hdmi audio
+  lineinfile:
+    dest: /etc/modprobe.d/{{ ansible_hostname }}.conf
+    regexp: "^options snd_hda_intel enable"
+    line: "options snd_hda_intel enable=0,1"
+

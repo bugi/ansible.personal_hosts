@@ -5,4 +5,9 @@
 - include: pb-desktop.yml
 - include: pb-laptop.yml
 - include: pb-user-brian-setup.yml
-  # - include: pb-host-bug-vpn.yml
+# - include: pb-host-bug-vpn.yml
+
+- hosts: bug
+  sudo: True
+  roles:
+    - role: intel/sound
