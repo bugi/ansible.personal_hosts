@@ -20,6 +20,8 @@ packages:
       - kmix
       - gnome-control-center
       - kdesudo
+      - xsel
+      - xcape
     portable:
       all:
         - laptop-mode-tools
