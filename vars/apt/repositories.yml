@@ -38,3 +38,4 @@ ppa:
   # http://www.thinkwiki.org/wiki/Tpacpi-bat
 # - ppa:morgwai/tpbat
   - deb http://ppa.launchpad.net/morgwai/tpbat/ubuntu trusty main
+  - ppa:enlightenment-git/ppa
