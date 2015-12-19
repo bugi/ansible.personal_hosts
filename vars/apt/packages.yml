@@ -22,7 +22,8 @@ packages:
       - kdesudo
       - xsel
       - xcape
-      - terminology
+      # - terminology
+      - pavucontrol
     portable:
       all:
         - laptop-mode-tools
